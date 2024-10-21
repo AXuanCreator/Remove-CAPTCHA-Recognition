@@ -1,12 +1,32 @@
 # 基于深度学习的验证码识别系统
 
-> 本项目注意事项
+## 项目介绍
 
 本项目结构独立性较强，主要由 **验证码降噪分割算法** 和 **图像分类神经网络结构** 两部分组成，可以仅查看其中的一部分
 
-验证码降噪算法的目的是将一张带有数个字符的图片分割为独立的字符，以便识别
+验证码降噪算法的目的是将一张带有数个字符的图片分割为独立的字符，以便识别, 图像分类网络会使用 Pytorch 复现各种架构
 
-图像分类网络会使用Pytorch复现各种架构，包括但不限于`AlexNet | VGG | NiN`
+</br>
+
+**降噪算法:**
+
+* 灰度峰值滤波
+* ...
+
+**分割算法**:
+
+* 列扫描断点分割
+* 基于 Selective Search 的区域分割(正在进行)
+* ...
+
+**图像分类网络:**
+
+* AlexNet
+* VGG16
+* NiN
+* ...
+
+</br>
 
 </br>
 
@@ -22,20 +42,20 @@
 
 分割算法: **列扫描断点分割**
 
-训练集: 2500张  (2500 x 4 理论1w)
+训练集: 2500 张  (2500 x 4 理论 1w)
 
 测试集: 7000+张
 
-网络架构: 网络架构会做出一些修改，以更符合该任务。灰度图会repeat至3个通道
+网络架构: 网络架构会做出一些修改，以更符合该任务。灰度图会 repeat 至 3 个通道
 
 |                 网络架构                  |             训练轮次-Epoch              |               准确率-Accuracy               |                             备注                             |
 | :---------------------------------------: | :-------------------------------------: | :-----------------------------------------: | :----------------------------------------------------------: |
 |                 CustomNet                 |                   100                   |                   0.86112                   |                          自定义网络                          |
 |                  AlexNet                  |                   50                    |                   0.89926                   |                           参数微调                           |
-| <span style="color:#FF3333;">VGG16</span> | <span style="color:#FF3333;">50</span>  | <span style="color:#FF3333;">0.00013</span> |      <span style="color:#FF3333;">FC层4096->1024</span>      |
-|                   VGG16                   |                   100                   |                   0.89680                   |               FC层4096->1024，58E Loss开始下降               |
-|  <span style="color:#FF3333;">NiN</span>  | <span style="color:#FF3333;">50</span>  | <span style="color:#FF3333;">0.00000</span> | <span style="color:#FF3333;">输出层使用自适应平均池化</span> |
-|  <span style="color:#FF3333;">NiN</span>  | <span style="color:#FF3333;">100</span> | <span style="color:#FF3333;">0.00013</span> | <span style="color:#FF3333;">输出层使用自适应平均池化</span> |
+| <span style="color:#FF3333;"> VGG16 </span> | <span style="color:#FF3333;"> 50 </span>  | <span style="color:#FF3333;"> 0.00013 </span> |      <span style="color:#FF3333;"> FC 层 4096-> 1024 </span>      |
+|                   VGG16                   |                   100                   |                   0.89680                   |               FC 层 4096-> 1024，58E Loss 开始下降               |
+|  <span style="color:#FF3333;"> NiN </span>  | <span style="color:#FF3333;"> 50 </span>  | <span style="color:#FF3333;"> 0.00000 </span> | <span style="color:#FF3333;"> 输出层使用自适应平均池化 </span> |
+|  <span style="color:#FF3333;"> NiN </span>  | <span style="color:#FF3333;"> 100 </span> | <span style="color:#FF3333;"> 0.00013 </span> | <span style="color:#FF3333;"> 输出层使用自适应平均池化 </span> |
 |                    NiN                    |                   50                    |                   0.89516                   |                      输出层使用全连接层                      |
 
 </br>
